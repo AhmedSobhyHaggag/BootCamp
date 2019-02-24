@@ -31,7 +31,7 @@ void Test_External_Interrupt()
    
    /*State Machine for all states*/
 	        
-	        while(1)
+	        while(HIGH)
 	        {
 		        switch(state)
 		        {

@@ -16,16 +16,20 @@
 
 uint8  volatile state;
 
-
+void DIO_INIT()
+{
+	DIO_SetPinDirection(PB5,OUTPUT);
+	DIO_SetPinDirection(PB6,OUTPUT);
+	DIO_SetPinDirection(PB7,OUTPUT);
+}
 void Test_External_Interrupt()
 {
-	        INIT_INT2();
-	        
-	        DIO_SetPinDirection(PB5,OUTPUT);
-	        DIO_SetPinDirection(PB6,OUTPUT);
-	        DIO_SetPinDirection(PB7,OUTPUT);
-
-
+	/*Intialize I/O Pins*/
+	DIO_INIT();
+	/*INIT EXTERNAL INT2*/
+   INIT_INT2();
+   
+   /*State Machine for all states*/
 	        
 	        while(1)
 	        {
@@ -48,7 +52,7 @@ void Test_External_Interrupt()
 
 
 ISR(INT2_vect)
-{		 
+{		 /* change the state when the swith is pressed*/
 		 if(state==READY) state=STEADY;
 		 else if(state==STEADY) state=GO;
 		 else if(state==GO) state=READY;
